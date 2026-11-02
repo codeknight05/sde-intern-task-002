@@ -154,4 +154,10 @@ You must understand every line you submit. We check this with your video and in 
 4. Record a video of **3 minutes or less** (Loom or unlisted YouTube). Show the architecture, the data flow, and one trade-off you made. Make sure anyone with the link can view it.
 5. Paste the repository link and the video link in the application form.
 
+## Decisions
+
+1. **Store money as integer cents.** Bill totals and shares are validated as positive whole cents, and the remainder goes to the earliest members. This keeps the share sum exact without floating-point money math.
+2. **Make payment a conditional database update.** A share is paid only when its `paid_at` field is still empty. The idempotency key is stored with the payment, so a retry returns the original result while a competing key gets a conflict.
+3. **Keep the page on the API path.** The household, bill and balance views load from API responses. A payment stays visually unpaid until the server confirms it; request errors remain visible so the user can retry.
+
 We will run `pnpm install && pnpm check && pnpm typecheck && pnpm test` on your repository.
