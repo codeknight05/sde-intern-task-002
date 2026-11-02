@@ -1,9 +1,30 @@
-# SDE Intern Assignment: Shared Bill Splitter
+# Shared Household Bill Splitter
 
-Welcome. In this assignment you build a small bill splitter for a shared home. It has two parts:
+## What it does
 
-1. **Homes and members:** create a home and add members to it.
-2. **Bill splitting:** split a bill between the members. Each member pays their own share.
+Housemates often pay shared expenses at different times, then have to remember who owes what. This app keeps a simple household ledger: create a home, add its members, record shared bills, and track each person's unpaid share.
+
+Bills are divided evenly among the members who belong to the home when the bill is created. Shares use whole cents, so any remainder is assigned one cent at a time in member creation order. For example, ₹1,000 shared by three members becomes ₹334, ₹333, and ₹333. The balances view totals each member's unpaid shares across bills.
+
+The **Mark paid** action records that a share has been settled and updates the outstanding balance. It does not process or transfer money. This take-home project has no authentication; anyone with a home's ID can open and update that household, so it is a prototype rather than a secure production ledger.
+
+## How to use it
+
+1. Create a household and add its members.
+2. Record a bill with its title and total amount.
+3. Review the split, then mark each share paid when the housemate settles it.
+4. Return to the same household using its home ID, which is also saved in the current browser.
+
+## Project stack
+
+- **API:** Hono on Cloudflare Workers
+- **Database:** Cloudflare D1 (SQLite)
+- **Web:** React, Vite, TanStack Router
+- **Language:** TypeScript
+
+## Assignment brief
+
+This repository is the SDE intern take-home implementation. The assignment emphasizes correct data handling, defensive input validation, payment idempotency, and understandable TypeScript.
 
 The assignment is small on purpose. We want correct, safe, and clear code. We do not want many features.
 
@@ -15,17 +36,6 @@ The assignment is small on purpose. We want correct, safe, and clear code. We do
 - **You understand your code.** You record a short video and explain it.
 
 Take your time. A careful, correct solution is better than a fast one. We expect 2 to 3 days of real work.
-
-## Stack (required)
-
-- **API:** Hono on Cloudflare Workers
-- **Database:** Cloudflare D1 (SQLite). The binding is `DB` in `api/wrangler.jsonc`.
-- **Web:** React, Vite, TanStack Router
-- **Language:** TypeScript on both sides
-- **Tests:** Vitest, running inside the Workers runtime
-- **Quality:** Biome. `pnpm check` and `pnpm typecheck` must pass.
-
-You choose the rest (styling, form library, validation library). Pick tools you can explain.
 
 ## The task
 
